@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: "expenceAccounting"
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: password
+    username: 
