@@ -10,24 +10,21 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "goods")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Good {
-
+@Entity
+@Table(name ="cheques")
+public class Cheque {
     @Id
-    @Column(name = "id_goods")
+    @Column(name = "id_cheque")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
-    @Column(name = "good_Title")
-    String title;
-    @Column(name = "good_price")
-    double price;
-    LocalDate dateOfCreate;
+    Long checkId;
+    LocalDate dateOfPurchase;
 
-    @OneToMany(mappedBy = "good")
-    Set<PuchaseComposition> puchaseCompositions = new HashSet<>();
+    @OneToMany(mappedBy = "cheque")
+    Set<PuchaseComposition> puchaseCompositions;
+
+
 }

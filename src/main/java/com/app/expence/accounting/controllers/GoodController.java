@@ -29,9 +29,6 @@ public class GoodController {
     public Good getGood(@PathVariable Long id){
         return goodService.getGood(id);
     }
-    @GetMapping("/getCostByDate/{date}")
-    public double getCostForDate(@PathVariable LocalDate date){
-        return goodService.getCostByDate(date);
-    }
+
 
 }

@@ -35,7 +35,4 @@ public class GoodService {
         return goodRepo.findById(id).orElse(null);
     }
 
-    public double getCostByDate(LocalDate date) {
-        return goodRepo.findCostByDateOfCreate(date);
-    }
 }
