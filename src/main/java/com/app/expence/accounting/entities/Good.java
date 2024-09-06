@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "goods")
@@ -27,5 +27,11 @@ public class Good {
     @Column(name = "good_price")
     double price;
     LocalDate dateOfCreate;
+    @ManyToMany
+    @JoinTable(
+            name = "purchase_composition",
+            joinColumns = {@JoinColumn(name = "id_goods")},
+            inverseJoinColumns = {@JoinColumn(name = "id_cheque")},
+    )
 
 }
