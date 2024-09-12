@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +26,6 @@ public class PurchaseCompositionService {
     private final ChequeRepo chequeRepo;
     private final PurchaseCompositionRepo purchaseCompositionRepo;
     private final GoodMappingUtils goodMappingUtils;
-
     public void addPurchaseComposition(List<GoodDto> goodDtoSet){
         Cheque cheque = new Cheque();
         cheque.setDateOfPurchase(LocalDate.now());
@@ -46,5 +47,12 @@ public class PurchaseCompositionService {
 
     public List<PuchaseComposition> getCompositionByChequeId(Long id){
         return purchaseCompositionRepo.getPuchaseCompositionByChequeId(id);
+    }
+
+    public double getExpenceForPeriod(LocalDate start, LocalDate end){
+        double sum = purchaseCompositionRepo.findByDateOfPurchaseBetween(start,end)
+                .stream()
+                .mapToDouble(element -> element.getAmount()*element.getGood().getPrice()).sum();
+        return sum;
     }
 }

@@ -4,10 +4,9 @@ import com.app.expence.accounting.dto.GoodDto;
 import com.app.expence.accounting.repositories.PurchaseCompositionRepo;
 import com.app.expence.accounting.services.PurchaseCompositionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -21,6 +20,11 @@ public class PurchaseController {
     public void addPurchase (@RequestBody List<GoodDto> goodDtos){
 
         purchaseCompositionService.addPurchaseComposition(goodDtos);
+    }
+
+    @GetMapping("/getExpenceByPeriod/{start}&{end}")
+    public double getExpenceByPeriod(@PathVariable LocalDate start, @PathVariable LocalDate end){
+        return purchaseCompositionService.getExpenceForPeriod(start,end);
     }
 
 }
