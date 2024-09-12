@@ -43,4 +43,8 @@ public class PurchaseCompositionService {
                 }
                 );
     };
+
+    public List<PuchaseComposition> getCompositionByChequeId(Long id){
+        return purchaseCompositionRepo.getPuchaseCompositionByChequeId(id);
+    }
 }

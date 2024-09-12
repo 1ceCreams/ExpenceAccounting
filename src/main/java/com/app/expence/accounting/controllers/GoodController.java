@@ -2,11 +2,15 @@ package com.app.expence.accounting.controllers;
 
 import com.app.expence.accounting.dto.GoodDto;
 import com.app.expence.accounting.entities.Good;
+import com.app.expence.accounting.entities.PuchaseComposition;
 import com.app.expence.accounting.services.GoodService;
+import com.app.expence.accounting.services.PurchaseCompositionService;
+import com.app.expence.accounting.utils.GoodMappingUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -14,6 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GoodController {
     private final  GoodService goodService;
+    private final PurchaseCompositionService purchaseCompositionService;
+    private final GoodMappingUtils goodMappingUtils;
 
     @PostMapping("/addGood")
     public void addGood(@RequestBody GoodDto goodDto){
@@ -30,5 +36,9 @@ public class GoodController {
         return goodService.getGood(id);
     }
 
+    @GetMapping("/getGoodByCheque/{id}")
+    public List<GoodDto> getGoodByCheque(@PathVariable Long id){
+        return goodService.getGoodsByCheque(id);
 
+    }
 }

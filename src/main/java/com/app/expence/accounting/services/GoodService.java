@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ public class GoodService {
 
     private final GoodRepo goodRepo;
     private final GoodMappingUtils goodMappingUtils;
+    private final PurchaseCompositionService compositionService;
 
     public void addGood(GoodDto goodDto){
         Good newGood = goodMappingUtils.mapToGood(goodDto);
@@ -33,6 +35,24 @@ public class GoodService {
 
     public Good getGood(Long id) {
         return goodRepo.findById(id).orElse(null);
+    }
+
+    public List<GoodDto> getGoodsByCheque(Long id){
+        List<GoodDto> goodIds = new ArrayList<>();
+        goodIds.addAll(
+                compositionService.getCompositionByChequeId(id)
+                        .stream()
+                        .map(element -> goodMappingUtils
+                                .mapToGoodDto(
+                                        element.getGood(),
+                                        element.getAmount(),
+                                        element.getDateOfPurchase()
+                                        ))
+                        .toList());
+
+        return goodIds;
+
+
     }
 
 }
