@@ -22,6 +22,13 @@ public class GoodMappingUtils {
         return goodDto;
     }
 
+    public GoodDto maptoGoodDto(Good good){
+        GoodDto goodDto = new GoodDto();
+        goodDto.setTitle(good.getTitle());
+        goodDto.setPrice(good.getPrice());
+        return goodDto;
+    }
+
     public Good mapToGood(GoodDto goodDto){
         Good good = new Good();
         good.setTitle(goodDto.getTitle());

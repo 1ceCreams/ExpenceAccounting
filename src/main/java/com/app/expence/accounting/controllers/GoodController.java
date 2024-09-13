@@ -28,7 +28,7 @@ public class GoodController {
     }
 
     @GetMapping("/getGoods")
-    public List<Good> getGood(){
+    public List<GoodDto> getGood(){
         return goodService.getGoods();
     }
     @GetMapping("/getGood/{id}")

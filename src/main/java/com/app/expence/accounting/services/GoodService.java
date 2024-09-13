@@ -29,8 +29,8 @@ public class GoodService {
         goodRepo.save(newGood);
     }
 
-    public List<Good> getGoods(){
-        return goodRepo.findAll();
+    public List<GoodDto> getGoods(){
+        return goodRepo.findAll().stream().map(goodMappingUtils::maptoGoodDto).toList();
     }
 
     public Good getGood(Long id) {
@@ -38,8 +38,8 @@ public class GoodService {
     }
 
     public List<GoodDto> getGoodsByCheque(Long id){
-        List<GoodDto> goodIds = new ArrayList<>();
-        goodIds.addAll(
+        List<GoodDto> goods = new ArrayList<>();
+        goods.addAll(
                 compositionService.getCompositionByChequeId(id)
                         .stream()
                         .map(element -> goodMappingUtils
@@ -50,7 +50,7 @@ public class GoodService {
                                         ))
                         .toList());
 
-        return goodIds;
+        return goods;
 
 
     }
